@@ -1,1 +1,0 @@
-# galaxy_consultancy_website
