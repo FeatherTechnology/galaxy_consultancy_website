@@ -6777,6 +6777,7 @@ img.haber-gorsel {
   justify-content: center;
   flex-wrap: wrap;
   box-shadow: 3px 3px 13px 0 rgba(0, 0, 0, 0.096);
+   border: 2px solid #ffc107; /* golden border outline */
   -webkit-transform: translateY(0%) translateZ(0px) scale(0.89); }
   @media only screen and (max-width: 1024px) {
     .post-kutu {

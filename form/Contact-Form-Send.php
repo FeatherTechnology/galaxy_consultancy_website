@@ -1,40 +1,51 @@
+
 <?php
 
-if(isset($_POST)) {
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-   
-    $_isim = $_POST["isim"];
-    $_eposta = $_POST["eposta"];
-    $_telefon = $_POST["telefon"];
+require 'PHPMailer/PHPMailer.php';
+require 'PHPMailer/SMTP.php';
+require 'PHPMailer/Exception.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	$_isim = $_POST["isim"];
+	$_eposta = $_POST["eposta"];
+	$_telefon = $_POST["telefon"];
 	$_mesaj = $_POST["mesaj"];
 
-	include_once("class.phpmailer.php");
+	$mail = new PHPMailer(true);
 
-	$mail = new PHPMailer();
-	$mail->IsSMTP();
-	$mail->SetLanguage("en", "language/");
-	$mail->CharSet = "utf-8";
-	$mail->Host = "mail.example.com"; // web server host information
-	$mail->SMTPAuth = true;    // It must be false if not to login with SMTP_username.
-	$mail->Username = "example@example.com"; // e-mail username
-	$mail->Password = "LgI(mj0z6]ym"; // Mail password
-	$mail->From = ""; // Who is the mail from?
-	$mail->FromName = "Web Form Mail | https://templatemonster.com/author/garantiwebt"; // Mailbox Incoming Header
-	$mail->AddAddress("akshayaashok331@gmail.com"); // address to send mail
-	$mail->Subject = "Templatemonster Garantiwebt Contact Form";
-	$mail->IsHTML(true);
-	$mail->Body = "Mail İçeriği ; <br>  İsim Soyisim : " .$_isim." <br> E-Posta : " .$_eposta." <br> Telefon : " .$_telefon." <br> Mesaj : ".$_mesaj." <br>";
+	try {
+		$mail->isSMTP();
+		$mail->Host       = 'smtp.zoho.in';
+		$mail->SMTPAuth   = true;
+		$mail->Username   = 'galaxyconsultancyorg@zohomail.in'; // your Zoho email
+		$mail->Password   = '41uewx7D9Zap'; // app password
+		$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+		$mail->Port       = 465;
+		$mail->setFrom('galaxyconsultancyorg@zohomail.in', 'Galaxy Consultancy Website');
+		$mail->addAddress("mail@galaxyconsultancy.org"); // where to receive mail
 
-	if (!$mail->Send()) {
-		echo "Error ----->>>>> " . $mail->ErrorInfo;
+		$mail->isHTML(true);
+		$mail->Subject = "New Enquiry from Galaxy Consultancy Website";
+		$mail->Body    = "
+            <h3>New Enquiry Details:</h3>
+            <p><strong>Name:</strong> {$_isim}</p>
+            <p><strong>Email:</strong> {$_eposta}</p>
+            <p><strong>Phone:</strong> {$_telefon}</p>
+            <p><strong>Message:</strong><br>{$_mesaj}</p>
+        ";
 
+		$mail->AltBody = "New Enquiry Details:\n
+            Name: {$_isim}\n
+            Email: {$_eposta}\n
+            Phone: {$_telefon}\n
+            Message: {$_mesaj}";
+
+		$mail->send();
+		echo "Success! Enquiry has been sent.";
+	} catch (Exception $e) {
+		echo "Error: Mail could not be sent. PHPMailer Error: {$mail->ErrorInfo}";
 	}
-
-
-	echo "Success";
-
-                   
-
 }
-
-
