@@ -488,7 +488,7 @@
     <section class="iletisim-form-alani">
         <h2 class="h2-baslik-hizmetler-21 wow fadeInUp" data-wow-delay="0.5s">Request a Free Consultation</h2>
         <div class="bosluk3"></div>
-        <form action="contactform.php" class="form" method="post">
+        <form action="contactform.php" class="form" method="post" enctype="multipart/form-data">
             <div class="container">
                 <div class="row">
                     <div class="col-sm">
@@ -508,22 +508,34 @@
                     <div class="col-sm">
                         <div class="form__grup wow fadeInRight" data-wow-delay="0.8s">
                             <input type="text" class="form__input" placeholder="Phone Number" id="txt_telefon"
-                                name="telefon" required>
+                                name="telefon" onkeypress="if(this.value.length==10) return false;" required>
                             <label for="telefon" class="form__label">Phone Number</label>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Resume and Message in Same Row -->
             <div class="container">
                 <div class="row">
                     <div class="col-sm">
+                        <div class="form__grup wow fadeInUp" data-wow-delay="0.9s">
+                            <input type="file" name="resume" id="resume" class="form__input" accept=".pdf,.doc,.docx"
+                                placeholder="Resume">
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg">
                         <div class="form__grup wow fadeInUp" data-wow-delay="0.9s">
                             <textarea name="message" placeholder="Your Message" id="txt_mesaj"
                                 class="form__input"></textarea>
                         </div>
                     </div>
+                    <div class="col-sm"></div>
                 </div>
             </div>
+
             <div class="container">
                 <div class="row">
                     <div class="col-sm">
@@ -535,6 +547,8 @@
             </div>
         </form>
     </section>
+
+
     <!--Posts-->
     <!-- <section class="yorumlar-alani-sayfa">
         <div class="container">
@@ -692,10 +706,8 @@
             })
         </script>
         <script>
-            $(document).ready(function () {
+             $(document).ready(function () {
                 $('#btn_Gonder').click(function () {
-
-                    //alert("test");
 
                     var isim = $('#txt_isim').val();
                     var eposta = $('#txt_eposta').val();
@@ -706,15 +718,23 @@
                         alert("Please fill all the fields before submitting.");
                         return; // Stop the function if fields are empty
                     }
-                    var json_data = {};
-                    json_data.isim = isim;
-                    json_data.eposta = eposta;
-                    json_data.telefon = telefon;
-                    json_data.mesaj = mesaj;
+                     var formData = new FormData();
+                    formData.append("isim", isim);
+                    formData.append("eposta", eposta);
+                    formData.append("telefon", telefon);
+                    formData.append("mesaj", mesaj);
+
+                    // Append resume file
+                    var file = $('#resume')[0].files[0];
+                    if (file) {
+                        formData.append("resume", file);
+                    }
                     $.ajax({
                         url: "form/Contact-Form-Send.php",
                         method: "post",
-                        data: json_data,
+                        data: formData,
+                        contentType: false,
+                        processData: false,
                         success: function (response) {
                             if (response == "Success") {
                                 alert("Mesajınız Gönderildi.");
@@ -729,6 +749,7 @@
                     });
                 });
             });
+
         </script>
     </footer>
 </body>
