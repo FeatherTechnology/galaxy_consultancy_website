@@ -130,58 +130,61 @@
         </section>
         <!--İletişim Form Alanı-->
         <section class="iletisim-form-alani">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm">
-                        <form action="contactform.php" class="form" method="post">
+            <form action="contactform.php" class="form" method="post" enctype="multipart/form-data">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm">
+
                             <div class="form__grup wow fadeInLeft" data-wow-delay="0.5s">
                                 <input type="text" class="form__input" placeholder="Full Name" id="txt_isim" name="name"
                                     required>
                                 <label for="name" class="form__label">Full Name</label>
                             </div>
-                    </div>
-                    <div class="col-sm">
-                        <div class="form__grup wow fadeInLeft" data-wow-delay="0.6s">
-                            <input type="email" class="form__input" placeholder="Email Address" id="txt_eposta"
-                                name="email" required>
-                            <label for="email" class="form__label">Email Address</label>
                         </div>
-                    </div>
-                    <div class="col-sm">
-                        <div class="form__grup wow fadeInRight" data-wow-delay="0.7s">
-                            <input type="text" class="form__input" placeholder="Phone Number" id="txt_telefon"
-                                name="telefon" required>
-                            <label for="telefon" class="form__label">Phone Number</label>
+                        <div class="col-sm">
+                            <div class="form__grup wow fadeInLeft" data-wow-delay="0.6s">
+                                <input type="email" class="form__input" placeholder="Email Address" id="txt_eposta"
+                                    name="email" required>
+                                <label for="email" class="form__label">Email Address</label>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm">
-                        <div class="form__grup wow fadeInUp" data-wow-delay="0.8s">
-                            <textarea name="message" placeholder="Your Message" id="txt_mesaj"
-                                class="form__input"></textarea>
-                            <label for="message" class="form__label"> Your Message ...</label>
+                        <div class="col-sm">
+                            <div class="form__grup wow fadeInRight" data-wow-delay="0.7s">
+                                <input type="text" class="form__input" placeholder="Phone Number" id="txt_telefon"
+                                    name="telefon" onkeypress="if(this.value.length==10) return false;" required>
+                                <label for="telefon" class="form__label">Phone Number</label>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm">
-                        <div class="form__grup wow fadeInUp" data-wow-delay="0.9s">
-                            <button class="buton-contact buton-contact--kirmizi" id="btn_Gonder">SEND</button>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="form__grup wow fadeInLeft" data-wow-delay="0.9s">
+                                <input type="file" name="resume" id="resume" class="form__input"
+                                    accept=".pdf,.doc,.docx">
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
 
-
+                        <div class="col-lg">
+                            <div class="form__grup wow fadeInUp" data-wow-delay="0.9s">
+                                <textarea name="message" placeholder="Your Message" id="txt_mesaj"
+                                    class="form__input"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm"></div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="form__grup wow fadeInUp" data-wow-delay="0.9s">
+                                <button class="buton-contact buton-contact--kirmizi" id="btn_Gonder">SEND</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
-            </div>
-
-            </div>
         </section>
     </main>
     <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1563266.1918335108!2d-75.84536893896656!3d40.06973977396647!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c0fb959e00409f%3A0x2cd27b07f83f6d8d!2sNew%20Jersey%2C%20Amerika%20Birle%C5%9Fik%20Devletleri!5e0!3m2!1str!2str!4v1645136392814!5m2!1str!2str" width="100%" height="450px" style="border:0;" allowfullscreen="" loading="lazy"></iframe> -->
@@ -268,15 +271,23 @@
                         alert("Please fill all the fields before submitting.");
                         return; // Stop the function if fields are empty
                     }
-                    var json_data = {};
-                    json_data.isim = isim;
-                    json_data.eposta = eposta;
-                    json_data.telefon = telefon;
-                    json_data.mesaj = mesaj;
+                    var formData = new FormData();
+                    formData.append("isim", isim);
+                    formData.append("eposta", eposta);
+                    formData.append("telefon", telefon);
+                    formData.append("mesaj", mesaj);
+
+                    // Append resume file
+                    var file = $('#resume')[0].files[0];
+                    if (file) {
+                        formData.append("resume", file);
+                    }
                     $.ajax({
                         url: "form/Contact-Form-Send.php",
                         method: "post",
-                        data: json_data,
+                        data: formData,
+                        contentType: false,
+                        processData: false,
                         success: function (response) {
                             if (response == "Success") {
                                 alert("Mesajınız Gönderildi.");
