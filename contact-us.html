@@ -13,10 +13,11 @@
     <link rel="stylesheet" href="css/odometer.min.css">
     <link rel="stylesheet" href="css/swiper.min.css">
     <link rel="stylesheet" href="css/flaticon.css">
-    <title>Contact Us | Cryptoce</title>
+    <!-- multiselect stylesheet -->
+    <link rel="stylesheet" href="css/multiselect/public/assets/styles/choices.min.css">
+    <title>Contact Us</title>
     <link rel="shortcut icon" type="image/png" href="img/favicon.png">
-    <meta name="description"
-        content="Cryptoce is a professional website developed for Crypto Money, Bitcoin, Finance and Consulting firms.">
+    <meta name="description" content="GALAXY CONSULTANCY - Solution In Intuition">
 </head>
 
 <body>
@@ -132,60 +133,131 @@
         <section class="iletisim-form-alani">
             <form action="contactform.php" class="form" method="post" enctype="multipart/form-data">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-sm">
-
-                            <div class="form__grup wow fadeInLeft" data-wow-delay="0.5s">
-                                <input type="text" class="form__input" placeholder="Full Name" id="txt_isim" name="name"
-                                    required>
-                                <label for="name" class="form__label">Full Name</label>
+                    <!-- Enquiry Type Selection -->
+                    <div class="radio-container">
+                        <div class="selector">
+                            <div class="selector-item">
+                                <input type="radio" id="candidate" name="enquiry_type" class="selector-item_radio"
+                                    value="candidate" checked>
+                                <label for="candidate" class="selector-item_label">Candidate</label>
                             </div>
-                        </div>
-                        <div class="col-sm">
-                            <div class="form__grup wow fadeInLeft" data-wow-delay="0.6s">
-                                <input type="email" class="form__input" placeholder="Email Address" id="txt_eposta"
-                                    name="email" required>
-                                <label for="email" class="form__label">Email Address</label>
-                            </div>
-                        </div>
-                        <div class="col-sm">
-                            <div class="form__grup wow fadeInRight" data-wow-delay="0.7s">
-                                <input type="text" class="form__input" placeholder="Phone Number" id="txt_telefon"
-                                    name="telefon" onkeypress="if(this.value.length==10) return false;" required>
-                                <label for="telefon" class="form__label">Phone Number</label>
+                            <div class="selector-item">
+                                <input type="radio" id="employer" name="enquiry_type" class="selector-item_radio"
+                                    value="employer">
+                                <label for="employer" class="selector-item_label">Employer / Client</label>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm">
-                            <div class="form__grup wow fadeInLeft" data-wow-delay="0.9s">
-                                <input type="file" name="resume" id="resume" class="form__input"
-                                    accept=".pdf,.doc,.docx">
+                    <br><br>
+                    <!-- Candidate Fields -->
+                    <div id="candidate_fields">
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="form__grup">
+                                    <input type="text" class="form__input" placeholder="Full Name" id="txt_name"
+                                        name="name">
+                                    <label for="name" class="form__label">Full Name</label>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="form__grup">
+                                    <input type="email" class="form__input" placeholder="Email Address" id="txt_email"
+                                        name="email">
+                                    <label for="email" class="form__label">Email Address</label>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="form__grup">
+                                    <input type="text" class="form__input" placeholder="Phone Number" id="txt_phone"
+                                        name="phone" onkeypress="if(this.value.length==10) return false;">
+                                    <label for="phone" class="form__label">Phone Number</label>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="col-lg">
-                            <div class="form__grup wow fadeInUp" data-wow-delay="0.9s">
-                                <textarea name="message" placeholder="Your Message" id="txt_mesaj"
-                                    class="form__input"></textarea>
+                        <div class="row mt-3">
+                            <div class="col-sm">
+                                <div class="form__grup">
+                                    <input type="file" name="resume" id="resume" class="form__input"
+                                        accept=".pdf,.doc,.docx,.jpg,.png">
+                                </div>
+                            </div>
+
+                            <div class="col-lg">
+                                <div class="form__grup">
+                                    <textarea name="message" placeholder="Your Message" id="txt_message"
+                                        class="form__input"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg"></div>
+                        </div>
+                    </div>
+
+                    <!-- Employer / Client Fields -->
+                    <div id="employer_fields" style="display:none;">
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="form__grup">
+                                    <input type="text" class="form__input" placeholder="Company Name" id="company_name"
+                                        name="company_name">
+                                    <label class="form__label">Company Name</label>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="form__grup">
+                                    <input type="text" class="form__input" placeholder="Contact Person"
+                                        id="contact_person" name="contact_person">
+                                    <label class="form__label">Contact Person</label>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="form__grup">
+                                    <input type="email" class="form__input" placeholder="Email" id="company_email"
+                                        name="company_email">
+                                    <label class="form__label">Email Address</label>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-sm"></div>
+
+                        <div class="row mt-3">
+                            <div class="col-sm">
+                                <div class="form__grup">
+                                    <input type="text" class="form__input" placeholder="Phone Number" id="company_phone"
+                                        name="company_phone" onkeypress="if(this.value.length==10) return false;">
+                                    <label class="form__label">Phone Number</label>
+                                </div>
+                            </div>
+
+                            <div class="col-sm">
+                                <div class="form__grup">
+                                    <select id="service_type" name="service_type[]" class="form__input"
+                                        multiple></select>
+                                </div>
+                            </div>
+                            <div class="col-lg">
+                                <div class="form__grup">
+                                    <textarea name="employer_message" placeholder="Details" id="employer_message"
+                                        class="form__input"></textarea>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="container">
-                    <div class="row">
+
+                    <!-- Submit Button -->
+                    <div class="row mt-3">
                         <div class="col-sm">
-                            <div class="form__grup wow fadeInUp" data-wow-delay="0.9s">
-                                <button class="buton-contact buton-contact--kirmizi" id="btn_Gonder">SEND</button>
+                            <div class="form__grup">
+                                <button class="buton-contact buton-contact--kirmizi" id="btn_submit">SEND</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </form>
         </section>
+
+
+
+
     </main>
     <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1563266.1918335108!2d-75.84536893896656!3d40.06973977396647!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c0fb959e00409f%3A0x2cd27b07f83f6d8d!2sNew%20Jersey%2C%20Amerika%20Birle%C5%9Fik%20Devletleri!5e0!3m2!1str!2str!4v1645136392814!5m2!1str!2str" width="100%" height="450px" style="border:0;" allowfullscreen="" loading="lazy"></iframe> -->
     <iframe
@@ -252,52 +324,150 @@
         <script src="js/countdown.js"></script>
         <script src="js/charts.js"></script>
         <script src="js/pointer.js"></script>
+        <!-- Multi select Plugin -->
+        <script src="css/multiselect/public/assets/scripts/choices.min.js"></script>
         <!--Cursor Script-->
         <script>
             init_pointer({
 
             })
         </script>
+
         <script>
+
+
             $(document).ready(function () {
-                $('#btn_Gonder').click(function () {
 
-                    var isim = $('#txt_isim').val();
-                    var eposta = $('#txt_eposta').val();
-                    var telefon = $('#txt_telefon').val();
-                    var mesaj = $('#txt_mesaj').val();
-                    // Check if any field is empty
-                    if (isim === "" || eposta === "" || telefon === "" || mesaj === "") {
-                        alert("Please fill all the fields before submitting.");
-                        return; // Stop the function if fields are empty
-                    }
-                    var formData = new FormData();
-                    formData.append("isim", isim);
-                    formData.append("eposta", eposta);
-                    formData.append("telefon", telefon);
-                    formData.append("mesaj", mesaj);
 
-                    // Append resume file
-                    var file = $('#resume')[0].files[0];
-                    if (file) {
-                        formData.append("resume", file);
+                // Show/hide fields based on radio selection
+                $('input[name="enquiry_type"]').change(function () {
+                    var type = $(this).val();
+
+                    if (type == 'candidate') {
+                        // Show candidate fields, hide employer fields
+                        $('#candidate_fields').show();
+                        $('#employer_fields').hide();
+
+                        // Clear employer fields
+                        $('#employer_fields').find('input, textarea').val('');
+                        servicesMultiselect.removeActiveItems(); // clear multi-select
+                    } else {
+                        // Show employer fields, hide candidate fields
+                        $('#employer_fields').show();
+                        $('#candidate_fields').hide();
+
+                        // Clear candidate fields
+                        $('#candidate_fields').find('input, textarea').val('');
+                        $('#resume').val(''); // clear file input
                     }
+                });
+
+
+
+
+                // Initialize Choices.js
+                const servicesMultiselect = new Choices('#service_type', {
+                    removeItemButton: true,
+                    placeholderValue: 'Select Service Type', // main placeholder
+                    searchPlaceholderValue: 'Search Service Type', // optional for search input
+                    noChoicesText: 'No more options available',
+                    allowHTML: true,
+                    shouldSort: false // keep original order
+                });
+
+                // Define your service options
+                const serviceOptions = [
+                    'Conflict Management  & Employee Relation',
+                    'HR Consultancy',
+                    'Job Requirement',
+                    'Leadership Development',
+                    'Motivational Speaking',
+                    'Organizational Development',
+                    'Payroll & Benefits Advisory',
+                    'Skill Training',
+                    'Talent Assessment',
+                    'Other'
+
+                ];
+
+                // Add all options in one go (faster and cleaner)
+                servicesMultiselect.setChoices(
+                    serviceOptions.map(option => ({ value: option, label: option })),
+                    'value',
+                    'label',
+                    false
+                );
+
+                // Form submit with validation and AJAX
+                $('#btn_submit').click(function (e) {
+                    e.preventDefault();
+
+                    const enquiry_type = $('input[name="enquiry_type"]:checked').val();
+                    const formData = new FormData();
+
+                    // Common field
+                    formData.append('enquiry_type', enquiry_type);
+
+                    if (enquiry_type === 'candidate') {
+                        // Candidate Fields
+                        const name = $('#txt_name').val().trim();
+                        const email = $('#txt_email').val().trim();
+                        const phone = $('#txt_phone').val().trim();
+                        const message = $('#txt_message').val().trim();
+                        const resume = $('#resume')[0].files[0];
+
+                        if (!name || !email || !phone || !message) {
+                            alert("⚠️ Please fill all Candidate fields.");
+                            return;
+                        }
+
+                        formData.append('name', name);
+                        formData.append('email', email);
+                        formData.append('phone', phone);
+                        formData.append('message', message);
+                        if (resume) formData.append('resume', resume);
+
+                    } else {
+                        // Employer Fields
+                        const company_name = $('#company_name').val().trim();
+                        const contact_person = $('#contact_person').val().trim();
+                        const company_email = $('#company_email').val().trim();
+                        const company_phone = $('#company_phone').val().trim();
+                        const employer_message = $('#employer_message').val().trim();
+                        const selectedServices = servicesMultiselect.getValue(true); // get selected values as array
+
+                        if (!company_name || !contact_person || !company_email || !company_phone || selectedServices.length === 0) {
+                            alert("⚠️ Please fill all Employer fields and select at least one service.");
+                            return;
+                        }
+
+                        formData.append('company_name', company_name);
+                        formData.append('contact_person', contact_person);
+                        formData.append('company_email', company_email);
+                        formData.append('company_phone', company_phone);
+                        formData.append('employer_message', employer_message);
+                        formData.append('service_type', JSON.stringify(selectedServices)); // send as JSON array
+                    }
+
+                    // Submit via AJAX
                     $.ajax({
                         url: "form/Contact-Form-Send.php",
-                        method: "post",
+                        type: "POST",
                         data: formData,
                         contentType: false,
                         processData: false,
                         success: function (response) {
-                            if (response == "Success") {
-                                alert("Mesajınız Gönderildi.");
-                            } else if (response == "Failed") {
-                                alert("Mesajınız Gönderilemedi. Lütfen Tekrar Deneyiniz.");
+                            if (response.trim() === "Success") {
+                                alert("Your enquiry has been sent successfully.");
+                                // Redirect to PHP page
+                                window.location.href = "contactform.php";
+                            } else {
+                                alert(" Failed to send enquiry. Please try again.");
                             }
-                            console.log(response);
-                            if (response.trim() == "Success") console.log("Success");
-                            else
-                                console.log("Failed :  " + response);
+
+                        },
+                        error: function () {
+                            alert("⚠️ Something went wrong. Please try again later.");
                         }
                     });
                 });
